@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    {% block stylesheets %}
+        <link href="{{ asset('static/pifu_browser.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('static/askommune.css') }}" rel="stylesheet" type="text/css">
+    {% endblock %}
+</head>
+<body>
+<h2>{{ title }}</h2>
+{% block content %} {% endblock %}
+</body>
+</html>

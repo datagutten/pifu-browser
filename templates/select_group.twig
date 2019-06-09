@@ -1,0 +1,13 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <a href="?group={{ unit.sourcedid.id }}">Direct members</a>
+    {% for level in levels %}
+        <h2>{{ level.typevalue }}</h2>
+    <ul>
+        {% for group in level.groups %}
+            <li><a href="?group={{ group.sourcedid.id }}">{{ group.description.short }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% endblock %}

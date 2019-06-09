@@ -1,0 +1,39 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<div style="display: none;">{{ printr|raw }}</div>
+    <h2>{{ person.name.fn }}</h2>
+    <table>
+        <tr>
+            <th>Comments</th>
+            <th>Group type</th>
+            <th>Description</th>
+            <th>Role type</th>
+            <th>Status</th>
+            <th>Begin</th>
+            <th>End</th>
+            <th>Period</th>
+        </tr>
+        {% for membership in memberships %}
+        <tr>
+            <td><a href="?group={{ membership.group.sourcedid.id }}">{{ membership.group.comments }}</a></td>
+            <td>{{ membership.group.grouptype.typevalue }}</td>
+            {% if membership.group.description.long is defined %}
+            <td>{{ membership.group.description.long }}</td>
+            {% else %}
+            <td>{{ membership.group.description.short }}</td>
+            {% endif %}
+            <td>{{ membership.membership.role.attributes.roletype }}</td>
+            <td>{{ membership.membership.role.status }}</td>
+            {% if membership.membership.role.timeframe is defined %}
+                <td>{{ membership.membership.role.timeframe.begin|default('') }}</td>
+                <td>{{ membership.membership.role.timeframe.end|default('') }}</td>
+                <td>{{ membership.membership.role.timeframe.adminperiod|default('') }}</td>
+            {% else %}
+                <td colspan="3">&nbsp;</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

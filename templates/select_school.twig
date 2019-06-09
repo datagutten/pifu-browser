@@ -1,0 +1,9 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <ul>
+    {% for school in schools %}
+        <li><a href="?school={{ school.sourcedid.id }}">{{ school.description.long }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

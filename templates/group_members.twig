@@ -1,0 +1,35 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <div style="display: none;">{{ printr|raw }}</div>
+    <table id="members">
+        <tr>
+            <th>Comments</th>
+            <th>Name</th>
+            <th>Id</th>
+            <th>Role type</th>
+            <th>Status</th>
+            <th>Begin</th>
+            <th>End</th>
+            <th>Period</th>
+        </tr>
+
+    {% for member in members %}
+        <tr>
+            <td>{{ member.membership.comments }}</td>
+            <td>{{ member.person.name.fn}}</td>
+            <td><a href="?person={{ member.person.sourcedid.id }}">{{ member.person.sourcedid.id }}</a></td>
+            <td><a href="?group={{ group_info.sourcedid.id }}&roletype={{ member.membership.role.attributes.roletype }}">{{ member.membership.role.attributes.roletype }}</a></td>
+            <td>{{ member.membership.role.status }}</td>
+            {% if member.membership.role.timeframe is defined %}
+            <td>{{ member.membership.role.timeframe.begin|default('') }}</td>
+            <td>{{ member.membership.role.timeframe.end|default('') }}</td>
+            <td>{{ member.membership.role.timeframe.adminperiod|default('') }}</td>
+            {% else %}
+                <td colspan="3">&nbsp;</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+    <p>Group has {{ members|length }} members</p>
+{% endblock %}
