@@ -1,6 +1,17 @@
 <?Php
 require 'vendor/autoload.php';
-$parser=new pifu_parser('pifuData.xml');
+try {
+    if(file_exists('pifu_path.php'))
+        $pifu_path = require 'pifu_path.php';
+    else
+        $pifu_path = '';
+    $parser=new pifu_parser($pifu_path);
+}
+catch (Exception $e)
+{
+    die($e->getMessage());
+}
+
 $browser = new PifuBrowser();
 
 $schools = $parser->schools();
